@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тебя :)</title>
+    <style>
+        body { margin: 0; background: #fff5f7; font-family: sans-serif; color: #5a3d3d; text-align: center; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        .container { max-width: 400px; width: 90%; background: white; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(255,182,193,0.3); }
+        .step { display: none; }
+        .active { display: block; animation: fadeIn 0.4s; }
+        img, video { width: 100%; border-radius: 20px; margin-bottom: 15px; display: block; background: #fdf2f4; }
+        .btn { background: #ff4d6d; color: white; border: none; padding: 16px; border-radius: 50px; width: 100%; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s; }
+        .btn:active { transform: scale(0.98); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        h2 { color: #ff4d6d; font-size: 20px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+<audio id="music" loop><source src="m.mp3" type="audio/mpeg"></audio>
+
+<div class="container">
+    <div class="step active" id="s0">
+        <h1>Привет! ✨</h1>
+        <p>Я подготовил для тебя сюрприз. <br>Включи звук и нажми кнопку!</p>
+        <button class="btn" onclick="next(0)">Начать →</button>
+    </div>
+
+    <div class="step" id="s1"><img src="1.jpg"><p>Ты прекрасна! 🌹</p><button class="btn" onclick="next(1)">Дальше →</button></div>
+    <div class="step" id="s2"><img src="2.jpg"><p>Твоя улыбка освещает всё! ✨</p><button class="btn" onclick="next(2)">Дальше →</button></div>
+    <div class="step" id="s3"><img src="3.jpg"><p>Обожаю наши моменты ❤️</p><button class="btn" onclick="next(3)">Дальше →</button></div>
+    <div class="step" id="s4"><img src="4.jpg"><p>Ты вдохновляешь меня 💎</p><button class="btn" onclick="next(4)">Дальше →</button></div>
+    <div class="step" id="s5"><img src="5.jpg"><p>Ты самая лучшая 🥰</p><button class="btn" onclick="next(5)">Смотреть видео →</button></div>
+
+    <div class="step" id="s6">
+        <video id="v1" controls playsinline><source src="v1.mp4" type="video/mp4"></video>
+        <p>Наши видео-воспоминания 🎥</p>
+        <button class="btn" onclick="next(6)">И последнее... →</button>
+    </div>
+
+    <div class="step" id="s7">
+        <video id="v2" controls playsinline><source src="v2.mp4" type="video/mp4"></video>
+        <h2>Ты очень важный для меня человек! ✨</h2>
+        <button id="mBtn" class="btn" style="background:#5a3d3d; margin-bottom: 10px; font-size: 14px;" onclick="toggleM()">⏸ Пауза музыки</button>
+        <button class="btn" onclick="location.reload()">Сначала 🔄</button>
+    </div>
+</div>
+
+<script>
+    const music = document.getElementById('music');
+    function next(n) {
+        document.getElementById('s' + n).classList.remove('active');
+        document.getElementById('s' + (n + 1)).classList.add('active');
+        if (n === 0) {
+            music.play().catch(e => console.log("Нужен клик для музыки"));
+        }
+        if (n === 6) {
+            music.pause();
+            document.getElementById('mBtn').innerText = "▶️ Включить музыку";
+        }
+        window.scrollTo(0, 0);
+    }
+    function toggleM() {
+        const b = document.getElementById('mBtn');
+        if (music.paused) { music.play(); b.innerText = "⏸ Пауза музыки"; }
+        else { music.pause(); b.innerText = "▶️ Включить музыку"; }
+    }
+</script>
+</body>
+</html>
